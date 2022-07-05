@@ -1,0 +1,38 @@
+version: "3"
+services:
+  rocketgo:
+    build: 
+      context: .
+      target: development
+    volumes:
+      - ./:/rocketgo:ro
+      - /rocketgo/node_modules
+    env_file:
+      - ./.env
+    command: npm run start:dev # Alter the command
+  mongo:
+    volumes:
+      - mongo-db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+  nginx:
+    ports:
+      - "3000:80"
+    depends_on:
+      - rocketgo
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+#   jenkins:
+#     image: jenkins/jenkins:latest
+#     ports:
+#       - "8080:8080"
+#       - "50000:50000"
+#     volumes:
+#       - jenkins_home:/var/jenkins_home
+
+# volumes:
+#   jenkins_home:
+# named volumes..
+volumes:
+  mongo-db:

@@ -1,0 +1,14 @@
+{
+    "watch": [
+      "src",
+      ".env"
+    ],
+    "ext": "js,ts,json",
+    "ignore": [
+      "src/**/*.spec.ts"
+    ],
+    "events": {
+        "start": "clear"
+    },
+    "exec": "ts-node -r tsconfig-paths --transpile-only ./src/app.ts"
+}

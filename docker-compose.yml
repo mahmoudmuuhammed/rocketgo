@@ -1,0 +1,12 @@
+version: "3"
+services:
+  rocketgo:
+    container_name: rocketgo
+    build: .
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    
+  nginx:
+    image: nginx:latest
